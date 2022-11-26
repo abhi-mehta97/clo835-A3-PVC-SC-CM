@@ -26,3 +26,10 @@ spec:
         ports: 
           - containerPort: 8080
             protocol: TCP
+        volumeMounts:
+        - mountPath: /tmp
+          name: mysql-pvc
+      volumes:
+        - name: mysql-pvc
+          persistentVolumeClaim:
+            claimName: mysql-pvc
