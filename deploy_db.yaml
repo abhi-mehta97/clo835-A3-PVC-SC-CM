@@ -27,7 +27,7 @@ spec:
           - containerPort: 8080
             protocol: TCP
         volumeMounts:
-        - mountPath: /tmp
+        - mountPath: /var/lib/mysql/
           name: mysql-pvc
       volumes:
         - name: mysql-pvc
