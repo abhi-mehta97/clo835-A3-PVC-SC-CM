@@ -33,3 +33,5 @@ spec:
         - name: mysql-pvc
           persistentVolumeClaim:
             claimName: mysql-pvc
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
