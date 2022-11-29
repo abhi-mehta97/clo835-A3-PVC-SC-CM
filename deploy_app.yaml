@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploywapp
+  namespace: lab3
+  labels:
+    app: employees
+spec:
+  selector:
+    matchLabels:
+      app: employees
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: employees
+    spec:
+      containers:
+      - name: employees
+        image: '311335618943.dkr.ecr.us-east-1.amazonaws.com/amehta63-wapp:v1.0'
+        ports: 
+        - containerPort: 80
+          protocol: TCP
+        env:
+        - name: DBPWD
+          value : pw
+        - name: DBHOST
+          value : "dbcsip.lab3"
+        - name: DBUSER
+          value : root
+        - name: DBPORT
+          value : "3306"
+      dnsPolicy: ClusterFirst
