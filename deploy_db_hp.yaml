@@ -25,11 +25,11 @@ spec:
           - containerPort: 3306
             protocol: TCP
         volumeMounts:
-        - mountPath: /var/lib/mysql/
-          name: mysql-pvc
+        - mountPath: /tmp
+          name: mysql-pvc-hp
       volumes:
-        - name: mysql-pvc
+        - name: mysql-pvc-hp
           persistentVolumeClaim:
-            claimName: mysql-pvc
+            claimName: mysql-pvc-hp
       dnsPolicy: ClusterFirst
       restartPolicy: Always
