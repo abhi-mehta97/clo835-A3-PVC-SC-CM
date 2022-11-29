@@ -3,8 +3,8 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: db
-  namespace: dbns
+  name: dbcsip
+  namespace: lab3
   labels:
     app: mysql
 
