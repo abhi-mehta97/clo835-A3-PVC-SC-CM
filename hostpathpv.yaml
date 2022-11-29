@@ -11,4 +11,4 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: /tmp/mysql
-  strorageClassName: localstorage
+  storageClassName: localstorage
