@@ -1,0 +1,51 @@
+
+name: CLO835-DockerBuild-ECRpush
+
+on:
+
+  push:
+    branches: [ "master" ]
+    
+
+  workflow_dispatch:
+  
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    
+
+    steps:
+
+      - uses: actions/checkout@v3
+      
+
+      - name: AWS ECR Login step
+        id: ecrlogin
+        uses: aws-actions/amazon-ecr-login@v1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          AWS_REGION: us-east-1   
+          
+          
+      - name: Docker Build and ECR Push
+        env:
+         ECR_REGISTRY: ${{ steps.ecrlogin.outputs.registry }}
+        run: |
+          cd clo835_fall2022_assignment1/
+          ls -ltra
+                    
+          # MYSQL Docker Build with mySQL df and Push 
+          
+          docker build -f Dockerfile_mysql -t $ECR_REGISTRY/amehta63-db:v1.0 .
+          docker push $ECR_REGISTRY/amehta63-db:v1.0
+          
+          # App Docker Build with default df and Push
+          
+          docker build -f Dockerfile -t $ECR_REGISTRY/amehta63-wapp:v1.0 .
+          docker push $ECR_REGISTRY/amehta63-wapp:v1.0
+          docker ps -a
